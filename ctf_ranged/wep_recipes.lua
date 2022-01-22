@@ -130,7 +130,7 @@ minetest.register_craft({output = "ctf_ranged:m60", type = "shapeless",
 minetest.register_craft({output = "ctf_ranged:deagle", type = "shapeless",
 			 recipe = {"ctf_ranged:gunpart3","default:steel_ingot"}})
 
-minetest.register_craft({output = "ctf_ranged:m2000", type = "shapeless",
+minetest.register_craft({output = "ctf_ranged:m200", type = "shapeless",
 			 recipe = {"ctf_ranged:gunpart3","default:gold_ingot"}})
 
 minetest.register_craft({output = "ctf_ranged:jackhammer", type = "shapeless",
