@@ -57,10 +57,13 @@ local function process_ray(ray, user, look_dir, def)
 	       })
 
 	       if def.liquid_travel_dist then
+		  -- Disabled due to a stack overflow when shooting quick sand
+		  --[[
 		  process_ray(rawf.bulletcast(
 				 def.bullet, hitpoint.intersection_point,
 				 vector.add(hitpoint.intersection_point, vector.multiply(look_dir, def.liquid_travel_dist)), true, false
 					     ), user, look_dir, def)
+		  --]]
 	       end
 	    end
 	 end
@@ -109,6 +112,7 @@ end
 function ctf_ranged.simple_register_gun(name, def)
    minetest.register_tool(rawf.also_register_loaded_tool(name, {
 							    description = def.description,
+							    ctf_guns_scope_zoom = def.scope_zoom or nil,
 							    inventory_image = def.texture.."^[colorize:#F44:42",
 							    ammo = def.ammo or "ctf_ranged:ammo",
 							    rounds = def.rounds,

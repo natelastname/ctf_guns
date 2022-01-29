@@ -18,7 +18,7 @@
    - HMG: ctf_ranged:m60
    Tier 3:
    - pistol: ctf_ranged:deagle
-   - DMR: ctf_ranged:m2000
+   - DMR: ctf_ranged:m200
    - Shotgun: ctf_ranged:jackhammer
    - SMG: ctf_ranged:mp5
    - Rifle: ctf_ranged:scar
@@ -129,9 +129,9 @@ ctf_ranged.simple_register_gun("ctf_ranged:glock17", {
 				  fire_sound = "ctf_ranged_mp5fire",
 				  rounds = 17,
 				  range = 75,
-				  damage = 4,
+				  damage = 3,
 				  automatic = false,
-				  fire_interval = 0.5,
+				  fire_interval = 0.35,
 				  liquid_travel_dist = 2
 })
 
@@ -141,6 +141,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:svd", {
 				  texture = "rangedweapons_svd.png",
 				  fire_sound = "ctf_ranged_m16fire",
 				  rounds = 10,
+				  scope_zoom=10,
 				  range = 150,
 				  damage = 5,
 				  fire_interval = 0.75,
@@ -235,7 +236,8 @@ ctf_ranged.simple_register_gun("ctf_ranged:m200", {
 				  description = "CheyTac Intervention",
 				  texture = "rangedweapons_m200.png",
 				  fire_sound = "ctf_ranged_m16fire",
-				  rounds = 40,
+				  rounds = 5,
+				  scope_zoom=10,
 				  range = 150,
 				  damage = 15,
 				  fire_interval = 2.0,
@@ -271,7 +273,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:mp5", {
 				  range = 100,
 				  damage = 2,
 				  fire_interval = 0.08,
-				  liquid_travel_dist = 2,
+				  liquid_travel_dist = 25,
 })
 
 ctf_ranged.simple_register_gun("ctf_ranged:scar", {
