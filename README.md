@@ -13,7 +13,7 @@ Also includes the "darkness_nerf" mod from capture the flag that makes players a
 
 1. default
 2. [Basic Materials](https://content.minetest.net/packages/VanessaE/basic_materials/)
-3. [Controls](https://forum.minetest.net/viewtopic.php?t=18471)
+3. [Controls](https://content.minetest.net/packages/BuckarooBanzay/controls/)
 
 ## Optional dependencies
 
