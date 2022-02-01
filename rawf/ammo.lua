@@ -58,6 +58,7 @@ function api.load_weapon_single(weapon, amount)
 	return weapon
 end
 
+-- A full reload for weapons with magazines
 function api.load_weapon(weapon, inv, lists)
 	local idef = weapon:get_definition()
 
