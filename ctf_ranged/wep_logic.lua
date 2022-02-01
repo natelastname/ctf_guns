@@ -1,4 +1,3 @@
-ctf_ranged = {}
 
 local shoot_cooldown = ctf_core.init_cooldowns()
 
@@ -107,7 +106,7 @@ local function cartridge_particles(player)
 	 glow = 15,
    })
 end
-      
+
 
 function ctf_ranged.simple_register_gun(name, def)
    minetest.register_tool(rawf.also_register_loaded_tool(name, {
@@ -123,7 +122,7 @@ function ctf_ranged.simple_register_gun(name, def)
 								  minetest.sound_play("ctf_ranged_click", {pos = user:get_pos()}, true)
 								  return
 							       end
-							       
+
 							       local result = rawf.load_weapon(itemstack, user:get_inventory())
 
 							       if result:get_name() == itemstack:get_name() then
