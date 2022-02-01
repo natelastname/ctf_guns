@@ -36,6 +36,28 @@ function api.unload_weapon(weapon, amount)
 	return weapon
 end
 
+-- For weapons like particular shotguns which load 1 round at a time (Also things like the milkor MGL)
+function api.load_weapon_single(weapon, amount)
+	local iname = weapon:get_name()
+	local rounds = assert(
+		minetest.registered_tools[iname].rounds,
+		"Must define 'rounds' property for ranged weapon "..dump(iname)
+	)
+
+	local new_wear = (65535 / (rounds+1)) * (amount or 1)
+
+	new_wear = weapon:get_wear() + new_wear
+
+	-- Though this is not likely to ever be called (because we are increasing weapon wear)
+	if new_wear >= 65535 then
+		return ItemStack(weapon:get_definition().unloaded_name)
+	end
+
+	weapon:set_wear(new_wear)
+
+	return weapon
+end
+
 function api.load_weapon(weapon, inv, lists)
 	local idef = weapon:get_definition()
 
