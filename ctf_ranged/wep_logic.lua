@@ -107,7 +107,7 @@ local function cartridge_particles(player)
 	 glow = 15,
    })
 end
-      
+
 
 function ctf_ranged.simple_register_gun(name, def)
    minetest.register_tool(rawf.also_register_loaded_tool(name, {
@@ -123,7 +123,7 @@ function ctf_ranged.simple_register_gun(name, def)
 								  minetest.sound_play("ctf_ranged_click", {pos = user:get_pos()}, true)
 								  return
 							       end
-							       
+
 							       local result = rawf.load_weapon(itemstack, user:get_inventory())
 
 							       if result:get_name() == itemstack:get_name() then
@@ -161,6 +161,28 @@ function ctf_ranged.simple_register_gun(name, def)
 								  shoot_cooldown:set(user, def.fire_interval)
 							       end
 
+								   if def.entity_projectile ~= "" and def.entity_projectile ~= nil then
+									local pos = user:get_pos()
+									local dir = user:get_look_dir()
+									local yaw = user:get_look_horizontal()
+									if pos and dir and yaw then
+										-- Adjust entity spawnpoint
+										pos.y = pos.y + user:get_properties().eye_height
+										local obj = minetest.add_entity(pos, def.entity_projectile)
+										if obj then
+											-- Limit playing the sound to X nodes away (In this case 25 nodes, move this to settings)
+											minetest.sound_play(def.fire_sound, {pos = user:get_pos(), max_hear_distance = 25})
+											-- I chose it's range as speed, but this won't seem right
+											obj:set_velocity(vector.multiply(dir, def.range))
+											obj:set_acceleration({x = dir.x * -3, y=-10, z = dir.y * -3})
+											obj:set_yaw(yaw + math.pi / 2)
+											local ent = obj:get_luaentity()
+											if ent then
+												ent.user = user:get_player_name()
+											end
+										end
+									end
+								   else
 							       local spawnpos, look_dir = rawf.get_bullet_start_data(user)
 							       local endpos = vector.add(spawnpos, vector.multiply(look_dir, def.range))
 							       local rays
@@ -187,8 +209,9 @@ function ctf_ranged.simple_register_gun(name, def)
 							       end
 
 							       if def.rounds > 0 then
-								  return rawf.unload_weapon(itemstack)
+								   return rawf.unload_weapon(itemstack)
 							       end
+								   end
 							    end
 
 							    if def.rightclick_func then
