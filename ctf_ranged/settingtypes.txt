@@ -1,0 +1,12 @@
+
+[Crafting]
+
+ctf_guns.craft_gunparts (Craft Gunparts) bool true
+
+ctf_guns.craft_ammo (Craft Ammo) bool true
+
+ctf_guns.craft_tier1_weapons (Craft Tier 1 Weapons) bool true
+
+ctf_guns.craft_tier2_weapons (Craft Tier 2 Weapons) bool true
+
+ctf_guns.craft_tier3_weapons (Craft Tier 3 Weapons) bool true
