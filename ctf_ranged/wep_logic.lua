@@ -1,4 +1,3 @@
-ctf_ranged = {}
 
 local shoot_cooldown = ctf_core.init_cooldowns()
 
