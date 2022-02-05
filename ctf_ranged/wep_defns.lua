@@ -9,6 +9,7 @@
    - SMG: ctf_ranged:thompson
    - Rifle: ctf_ranged:ak47
    - HMG: ctf_ranged:rpk
+   - E: ctf_ranged:energy_pistol
    Tier 2:
    - pistol: ctf_ranged:glock17
    - DMR: ctf_ranged:svd
@@ -16,6 +17,7 @@
    - SMG: ctf_ranged:uzi
    - Rifle: ctf_ranged:m16
    - HMG: ctf_ranged:m60
+   - E: ctf_ranged:energy_shotgun
    Tier 3:
    - pistol: ctf_ranged:deagle
    - DMR: ctf_ranged:m200
@@ -23,6 +25,7 @@
    - SMG: ctf_ranged:mp5
    - Rifle: ctf_ranged:scar
    - HMG: ctf_ranged:minigun
+   - E: ctf_ranged:energy_rifle
 ]]--
 
 
@@ -116,6 +119,20 @@ ctf_ranged.simple_register_gun("ctf_ranged:rpk", {
 				  damage = 2,
 				  fire_interval = 0.15,
 				  liquid_travel_dist = 2,
+})
+
+ctf_ranged.simple_register_gun("ctf_ranged:energy_pistol", {
+	type = "pistol",
+	description = "Laser Blaster",
+	texture = "rangedweapons_laser_blaster.png",
+	fire_sound = "ctf_ranged_mp5fire",
+	rounds = 20,
+	range = 85,
+	damage = 6,
+	automatic = true,
+	fire_interval = 0.35,
+	liquid_travel_dist = 2,
+	ammo = "ctf_ranged:eammo"
 })
 
 --------------------------
@@ -212,6 +229,22 @@ ctf_ranged.simple_register_gun("ctf_ranged:m60", {
 				  liquid_travel_dist = 2,
 })
 
+ctf_ranged.simple_register_gun("ctf_ranged:energy_shotgun", {
+	type = "shotgun",
+	description = "Laser Shotgun",
+	texture = "rangedweapons_laser_shotgun.png",
+	fire_sound = "ctf_ranged_shotgun",
+	bullet = {
+	   amount = 10,
+	   spread = 3.0,
+	},
+	rounds = 10,
+	range = 25,
+	damage = 2,
+	fire_interval = 0.65,
+	automatic = true,
+	ammo = "ctf_ranged:eammo"
+})
 
 
 --------------------------
@@ -306,6 +339,23 @@ ctf_ranged.simple_register_gun("ctf_ranged:minigun", {
 				  damage = 4,
 				  fire_interval = 0.08,
 				  liquid_travel_dist = 2,
+})
+
+ctf_ranged.simple_register_gun("ctf_ranged:energy_rifle", {
+	type = "smg",
+	description = "Laser Rifle",
+	texture = "rangedweapons_laser_rifle.png",
+	fire_sound = "ctf_ranged_pdudegun",
+	bullet = {
+	   spread = 1.0,
+	},
+	automatic = true,
+	rounds = 30,
+	range = 75,
+	damage = 7,
+	fire_interval = 0.25,
+	liquid_travel_dist = 2,
+	ammo = "ctf_ranged:eammo"
 })
 
 --------------------------
