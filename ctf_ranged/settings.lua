@@ -37,3 +37,9 @@ if settings.craft_tier3_weapons == nil then
     settings.craft_tier3_weapons = true
     minetest.settings:set_bool("ctf_guns.craft_tier3_weapons", settings.craft_tier3_weapons)
 end
+
+settings.craft_energy_weapons = minetest.settings:get_bool("ctf_guns.craft_energy_weapons")
+if settings.craft_energy_weapons == nil then
+    settings.craft_energy_weapons = true
+    minetest.settings:set_bool("ctf_guns.craft_energy_weapons", settings.craft_energy_weapons)
+end
