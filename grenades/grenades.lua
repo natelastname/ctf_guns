@@ -23,90 +23,98 @@ local function check_hit(pos1, pos2, obj)
 end
 
 local fragdef = {
-	description = "Frag grenade (Kills anyone near blast)",
-	image = "grenades_frag.png",
-	explode_radius = 10,
-	explode_damage = 26,
-	on_collide = function(def, obj)
-		return true
-	end,
-	on_explode = function(def, pos, name)
-		if not name or not pos then return end
+   description = "Frag grenade (Kills anyone near blast)",
+   image = "grenades_frag.png",
+   explode_radius = 10,
+   explode_damage = 26,
+   on_collide = function(def, obj)
+      return true
+   end,
+   on_explode = function(def, pos, name)
+      if not name or not pos then return end
 
-		local player = minetest.get_player_by_name(name)
-		if not player then return end
+      local player = minetest.get_player_by_name(name)
+      if not player then return end
 
 
-		local radius = def.explode_radius
+      local radius = def.explode_radius
 
-		minetest.add_particlespawner({
-			amount = 20,
-			time = 0.5,
-			minpos = vector.subtract(pos, radius),
-			maxpos = vector.add(pos, radius),
-			minvel = {x = 0, y = 5, z = 0},
-			maxvel = {x = 0, y = 7, z = 0},
-			minacc = {x = 0, y = 1, z = 0},
-			maxacc = {x = 0, y = 1, z = 0},
-			minexptime = 0.3,
-			maxexptime = 0.6,
-			minsize = 7,
-			maxsize = 10,
-			collisiondetection = true,
-			collision_removal = false,
-			vertical = false,
-			texture = "grenades_smoke.png",
-		})
+      minetest.add_particlespawner({
+	    amount = 20,
+	    time = 0.5,
+	    minpos = vector.subtract(pos, radius),
+	    maxpos = vector.add(pos, radius),
+	    minvel = {x = 0, y = 5, z = 0},
+	    maxvel = {x = 0, y = 7, z = 0},
+	    minacc = {x = 0, y = 1, z = 0},
+	    maxacc = {x = 0, y = 1, z = 0},
+	    minexptime = 0.3,
+	    maxexptime = 0.6,
+	    minsize = 7,
+	    maxsize = 10,
+	    collisiondetection = true,
+	    collision_removal = false,
+	    vertical = false,
+	    texture = "grenades_smoke.png",
+      })
 
-		minetest.add_particle({
-			pos = pos,
-			velocity = {x=0, y=0, z=0},
-			acceleration = {x=0, y=0, z=0},
-			expirationtime = 0.3,
-			size = 15,
-			collisiondetection = false,
-			collision_removal = false,
-			object_collision = false,
-			vertical = false,
-			texture = "grenades_boom.png",
-			glow = 10
-		})
+      minetest.add_particle({
+	    pos = pos,
+	    velocity = {x=0, y=0, z=0},
+	    acceleration = {x=0, y=0, z=0},
+	    expirationtime = 0.3,
+	    size = 15,
+	    collisiondetection = false,
+	    collision_removal = false,
+	    object_collision = false,
+	    vertical = false,
+	    texture = "grenades_boom.png",
+	    glow = 10
+      })
 
-		minetest.sound_play("grenades_explode", {
-			pos = pos,
-			gain = 1.0,
-			max_hear_distance = 64,
-		})
+      minetest.sound_play("grenades_explode", {
+			     pos = pos,
+			     gain = 1.0,
+			     max_hear_distance = 64,
+      })
 
-		remove_flora(pos, radius/2)
+      remove_flora(pos, radius/2)
 
-		for _, v in pairs(minetest.get_objects_inside_radius(pos, radius)) do
-			if v:is_player() and v:get_hp() > 0 and v:get_properties().pointable then
-				local footpos = vector.offset(v:get_pos(), 0, 0.1, 0)
-				local headpos = vector.offset(v:get_pos(), 0, v:get_properties().eye_height, 0)
-				local footdist = vector.distance(pos, footpos)
-				local headdist = vector.distance(pos, headpos)
-				local target_head = false
+      for _, v in pairs(minetest.get_objects_inside_radius(pos, radius)) do
+	 if v.punch ~= nil and v:get_hp() > 0 then
+	    local footpos = vector.offset(v:get_pos(), 0, 0.1, 0)
+	    local e_height = 0
+	    
+	    if v:get_properties().eye_height ~= nil then
+	       e_height = v:get_properties().eye_height
+	    else
+	       e_height = 1
+	    end
+	    
+	    local headpos = vector.offset(v:get_pos(), 0, e_height, 0)
+	    local footdist = vector.distance(pos, footpos)
+	    local headdist = vector.distance(pos, headpos)
+	    local target_head = false
 
-				if footdist >= headdist then
-					target_head = true
-				end
+	    if footdist >= headdist then
+	       target_head = true
+	    end
 
-				local hit_pos1 = check_hit(pos, target_head and headpos or footpos, v)
+	    local hit_pos1 = check_hit(pos, target_head and headpos or footpos, v)
 
-				-- Check the closest distance, but if that fails try targeting the farther one
-				if hit_pos1 or check_hit(pos, target_head and footpos or headpos, v) then
-					v:punch(player, 1, {
-						punch_interval = 1,
-						damage_groups = {
-							grenade = 1,
-							fleshy = def.explode_damage - ( (radius/3) * (target_head and headdist or footdist) )
-						}
-					}, nil)
-				end
-			end
-		end
-	end,
+	    -- Check the closest distance, but if that fails try targeting the farther one
+	    if hit_pos1 or check_hit(pos, target_head and footpos or headpos, v) then
+	       v:punch(player, 1, {
+			  punch_interval = 1,
+			  damage_groups = {
+			     grenade = 1,
+			     fleshy = def.explode_damage - ( (radius/3) * (target_head and headdist or footdist) )
+			  }
+				  }, nil)
+	    end
+	 end
+      end
+   end,
 }
 
 grenades.register_grenade("grenades:frag", fragdef)
