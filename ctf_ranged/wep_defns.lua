@@ -222,7 +222,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:deagle", {
 				  type = "pistol",
 				  description = "IMI Desert Eagle",
 				  texture = "rangedweapons_deagle.png",
-				  fire_sound = "ctf_ranged_mp5fire",
+				  fire_sound = "ctf_ranged_deagle",
 				  rounds = 8,
 				  range = 75,
 				  damage = 5,
@@ -328,4 +328,55 @@ ctf_ranged.simple_register_gun("ctf_ranged:python", {
 				  liquid_travel_dist = 2,
 })
 
+ctf_ranged.simple_register_gun("ctf_ranged:g11", {
+				  type = "smg",
+				  description = "HK G11",
+				  texture = "rangedweapons_g11.png",
+				  fire_sound = "ctf_ranged_mk23fire",
+				  bullet = {
+				     spread = 1.25,
+				     amount = 3
+				  },
+				  scope_zoom=10,
+				  automatic = false,
+				  rounds = 16,
+				  range = 150,
+				  damage = 5,
+				  fire_interval = 0.5,
+				  liquid_travel_dist = 2,
+})
 
+ctf_ranged.simple_register_gun("ctf_ranged:deagle_gold", {
+				  type = "pistol",
+				  description = "IMI Desert Eagle",
+				  texture = "rangedweapons_golden_deagle.png",
+				  fire_sound = "ctf_ranged_deagle",
+				  rounds = 8,
+				  range = 75,
+				  damage = 5,
+				  automatic = false,
+				  fire_interval = 0.5,
+				  liquid_travel_dist = 2
+})
+
+
+
+
+function launch_grenade(user)
+   grenades.throw_grenade("grenades:frag", 30, user)
+end
+
+ctf_ranged.simple_register_gun("ctf_ranged:m79", {
+				  type = "pistol",
+				  description = "M79",
+				  texture = "rangedweapons_m79.png",
+				  fire_sound = "ctf_ranged_ashotfir",
+				  ammo="ctf_ranged:40mm",
+				  rounds = 2,
+				  range = 50,
+				  damage = 3,
+				  automatic = false,
+				  fire_interval = 1.5,
+				  liquid_travel_dist = 2,
+				  on_fire_callback=launch_grenade
+})

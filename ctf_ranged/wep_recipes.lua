@@ -16,6 +16,16 @@
 
 ]]--
 
+minetest.register_craftitem("ctf_ranged:40mm", {
+			       description = "40mm Grenade",
+			       inventory_image = "rangedweapons_40mm.png",
+})
+
+minetest.register_craftitem("ctf_ranged:ammo", {
+			       description = "Ammo",
+			       inventory_image = "ctf_ranged_ammo.png",
+})
+
 minetest.register_craftitem("ctf_ranged:gunpart1", {
 				description = "Tier 1 gun part",
 				inventory_image = "rangedweapons_gunpart1.png"
@@ -34,25 +44,41 @@ minetest.register_craftitem("ctf_ranged:gunpart3", {
 -------------------------------
 
 if ctf_ranged.settings.craft_ammo == true then
-	if(minetest.get_modpath("mobs_mc")) ~= nil then
-	minetest.register_craft({
-		output = "ctf_ranged:ammo",
-		type = "shapeless",
-		recipe = {
-			"basic_materials:brass_ingot",
-			"mobs_mc:slimeball"
-		}
-	})
-	else
-	minetest.register_craft({
-		output = "ctf_ranged:ammo",
-		type = "shapeless",
-		recipe = {
-			"basic_materials:brass_ingot",
-			"default:gravel"
-		}
-	})
-	end
+   if(minetest.get_modpath("mobs_mc")) ~= nil then
+      minetest.register_craft({
+	    output = "ctf_ranged:ammo",
+	    type = "shapeless",
+	    recipe = {
+	       "basic_materials:brass_ingot",
+	       "mobs_mc:slimeball"
+	    }
+      })
+      minetest.register_craft({
+	    output = "ctf_ranged:40mm",
+	    type = "shapeless",
+	    recipe = {
+	       "basic_materials:brass_ingot",
+	       "mobs_mc:ghast_tear"
+	    }
+      })
+   else
+      minetest.register_craft({
+	    output = "ctf_ranged:ammo",
+	    type = "shapeless",
+	    recipe = {
+	       "basic_materials:brass_ingot",
+	       "default:gravel"
+	    }
+      })
+      minetest.register_craft({
+	    output = "ctf_ranged:40mm",
+	    type = "shapeless",
+	    recipe = {
+	       "basic_materials:brass_ingot",
+	       "tnt:gunpowder"
+	    }
+      })
+   end
 end
 
 if ctf_ranged.settings.craft_gunparts == true then
