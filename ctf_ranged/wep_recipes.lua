@@ -38,6 +38,10 @@ minetest.register_craftitem("ctf_ranged:gunpart3", {
 				description = "Tier 3 gun part",
 				inventory_image = "rangedweapons_gunpart3.png"
 })
+minetest.register_craftitem("ctf_ranged:gunparte", {
+	description = "Energy gun part",
+	inventory_image = "rangedweapons_gun_power_core.png"
+})
 
 -------------------------------
 -- Basics
@@ -79,6 +83,37 @@ if ctf_ranged.settings.craft_ammo == true then
 	    }
       })
    end
+   if(minetest.get_modpath("mobs_mc")) ~= nil then
+      minetest.register_craft({
+	    output = "ctf_ranged:ammo",
+	    type = "shapeless",
+	    recipe = {
+	       "basic_materials:brass_ingot",
+	       "mobs_mc:slimeball"
+	    }
+      })
+   else
+      minetest.register_craft({
+	    output = "ctf_ranged:ammo",
+	    type = "shapeless",
+	    recipe = {
+	       "basic_materials:brass_ingot",
+	       "default:gravel"
+	    }
+      })
+   end
+   if ctf_ranged.settings.craft_energy_weapons == true then
+      minetest.register_craft({
+	    output = "ctf_ranged:eammo",
+	    type = "shapeless",
+	    recipe = {
+	       "ctf_ranged:echarge",
+	       "ctf_ranged:echarge",
+	       "ctf_ranged:echarge",
+	       "ctf_ranged:echarge"
+	    }
+      })
+   end
 end
 
 if ctf_ranged.settings.craft_gunparts == true then
@@ -106,6 +141,17 @@ if ctf_ranged.settings.craft_gunparts == true then
 		{"", "", ""},
 		}
 	})
+	if ctf_ranged.settings.craft_energy_weapons == true then
+		minetest.register_craft({
+			output = "ctf_ranged:gunparte",
+			type = "shapeless",
+			recipe = {
+				"default:diamondblock",
+				"default:diamondblock",
+				"basic_materials:gear_steel"
+			}
+		})
+	end
 end
 
 -------------------------------
@@ -176,4 +222,13 @@ if ctf_ranged.settings.craft_tier3_weapons == true then
 
 	minetest.register_craft({output = "ctf_ranged:minigun", type = "shapeless",
 				recipe = {"ctf_ranged:gunpart3","default:bronze_ingot"}})
+end
+
+if ctf_ranged.settings.craft_energy_weapons == true then
+	minetest.register_craft({output = "ctf_ranged:energy_rifle", type = "shapeless",
+				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart3", "default:diamond"}})
+	minetest.register_craft({output = "ctf_ranged:energy_shotgun", type = "shapeless",
+				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart2", "default:diamond"}})
+	minetest.register_craft({output = "ctf_ranged:energy_pistol", type = "shapeless",
+				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart1", "default:diamond"}})
 end

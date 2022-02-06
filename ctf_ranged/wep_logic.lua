@@ -2,6 +2,15 @@
 local shoot_cooldown = ctf_core.init_cooldowns()
 
 
+minetest.register_craftitem("ctf_ranged:eammo", {
+	description = "Energy Ammo",
+	inventory_image = "ctf_ranged_eammo.png",
+})
+minetest.register_craftitem("ctf_ranged:echarge", {
+	description = "Energy Charge",
+	inventory_image = "ctf_ranged_echarge.png",
+})
+
 local function process_ray(ray, user, look_dir, def)
    local hitpoint = ray:hit_object_or_node({
 	 node = function(ndef)
