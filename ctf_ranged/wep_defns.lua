@@ -9,7 +9,6 @@
    - SMG: ctf_ranged:thompson
    - Rifle: ctf_ranged:ak47
    - HMG: ctf_ranged:rpk
-   - E: ctf_ranged:energy_pistol
    Tier 2:
    - pistol: ctf_ranged:glock17
    - DMR: ctf_ranged:svd
@@ -17,7 +16,6 @@
    - SMG: ctf_ranged:uzi
    - Rifle: ctf_ranged:m16
    - HMG: ctf_ranged:m60
-   - E: ctf_ranged:energy_shotgun
    Tier 3:
    - pistol: ctf_ranged:deagle
    - DMR: ctf_ranged:m200
@@ -25,7 +23,11 @@
    - SMG: ctf_ranged:mp5
    - Rifle: ctf_ranged:scar
    - HMG: ctf_ranged:minigun
+   Energy weapons:
+   - E: ctf_ranged:energy_pistol
    - E: ctf_ranged:energy_rifle
+   - E: ctf_ranged:energy_shotgun
+
 ]]--
 
 
@@ -121,20 +123,6 @@ ctf_ranged.simple_register_gun("ctf_ranged:rpk", {
 				  liquid_travel_dist = 2,
 })
 
-ctf_ranged.simple_register_gun("ctf_ranged:energy_pistol", {
-	type = "pistol",
-	description = "Laser Blaster",
-	texture = "rangedweapons_laser_blaster.png",
-	fire_sound = "ctf_ranged_mp5fire",
-	rounds = 20,
-	range = 85,
-	damage = 6,
-	automatic = true,
-	fire_interval = 0.35,
-	liquid_travel_dist = 2,
-	ammo = "ctf_ranged:eammo"
-})
-
 --------------------------
 -- Tier 2
 --------------------------
@@ -172,12 +160,12 @@ ctf_ranged.simple_register_gun("ctf_ranged:benelli", {
 				  texture = "rangedweapons_benelli.png",
 				  fire_sound = "ctf_ranged_shotgun",
 				  bullet = {
-				     amount = 28,
-				     spread = 3.0,
+				     amount = 20,
+				     spread = 2.5,
 				  },
 				  rounds = 8,
 				  range = 24,
-				  damage = 1,
+				  damage = 2,
 				  fire_interval = 2,
 })
 
@@ -192,7 +180,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:uzi", {
 				  automatic = true,
 				  rounds = 30,
 				  range = 75,
-				  damage = 1,
+				  damage = 2,
 				  fire_interval = 0.08,
 				  liquid_travel_dist = 2,
 })
@@ -229,24 +217,6 @@ ctf_ranged.simple_register_gun("ctf_ranged:m60", {
 				  liquid_travel_dist = 2,
 })
 
-ctf_ranged.simple_register_gun("ctf_ranged:energy_shotgun", {
-	type = "shotgun",
-	description = "Laser Shotgun",
-	texture = "rangedweapons_laser_shotgun.png",
-	fire_sound = "ctf_ranged_shotgun",
-	bullet = {
-	   amount = 10,
-	   spread = 3.0,
-	},
-	rounds = 10,
-	range = 25,
-	damage = 2,
-	fire_interval = 0.65,
-	automatic = true,
-	ammo = "ctf_ranged:eammo"
-})
-
-
 --------------------------
 -- Tier 3
 --------------------------
@@ -255,7 +225,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:deagle", {
 				  type = "pistol",
 				  description = "IMI Desert Eagle",
 				  texture = "rangedweapons_deagle.png",
-				  fire_sound = "ctf_ranged_mp5fire",
+				  fire_sound = "ctf_ranged_deagle",
 				  rounds = 8,
 				  range = 75,
 				  damage = 5,
@@ -271,7 +241,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:m200", {
 				  fire_sound = "ctf_ranged_m16fire",
 				  rounds = 5,
 				  scope_zoom=10,
-				  range = 150,
+				  range = 200,
 				  damage = 15,
 				  fire_interval = 2.0,
 				  liquid_travel_dist = 4,
@@ -289,7 +259,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:jackhammer", {
 				  automatic = true,
 				  rounds = 10,
 				  range = 24,
-				  damage = 1,
+				  damage = 2,
 				  fire_interval = 0.5,
 })
 
@@ -304,7 +274,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:mp5", {
 				  automatic = true,
 				  rounds = 30,
 				  range = 100,
-				  damage = 2,
+				  damage = 3,
 				  fire_interval = 0.08,
 				  liquid_travel_dist = 25,
 })
@@ -319,7 +289,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:scar", {
 				  },
 				  automatic = true,
 				  rounds = 20,
-				  range = 75,
+				  range = 150,
 				  damage = 6,
 				  fire_interval = 0.2,
 				  liquid_travel_dist = 2,
@@ -341,22 +311,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:minigun", {
 				  liquid_travel_dist = 2,
 })
 
-ctf_ranged.simple_register_gun("ctf_ranged:energy_rifle", {
-	type = "smg",
-	description = "Laser Rifle",
-	texture = "rangedweapons_laser_rifle.png",
-	fire_sound = "ctf_ranged_pdudegun",
-	bullet = {
-	   spread = 1.0,
-	},
-	automatic = true,
-	rounds = 30,
-	range = 75,
-	damage = 7,
-	fire_interval = 0.25,
-	liquid_travel_dist = 2,
-	ammo = "ctf_ranged:eammo"
-})
+
 
 --------------------------
 -- Other guns
@@ -370,7 +325,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:python", {
 				  bullet = {
 				     spread = 1.5,
 				  },
-				  automatic = true,
+				  automatic = false,
 				  rounds = 6,
 				  range = 100,
 				  damage = 5,
@@ -378,4 +333,107 @@ ctf_ranged.simple_register_gun("ctf_ranged:python", {
 				  liquid_travel_dist = 2,
 })
 
+ctf_ranged.simple_register_gun("ctf_ranged:g11", {
+				  type = "smg",
+				  description = "HK G11",
+				  texture = "rangedweapons_g11.png",
+				  fire_sound = "ctf_ranged_mk23fire",
+				  bullet = {
+				     spread = 1.25,
+				     amount = 3
+				  },
+				  scope_zoom=10,
+				  automatic = false,
+				  rounds = 16,
+				  range = 150,
+				  damage = 5,
+				  fire_interval = 0.5,
+				  liquid_travel_dist = 2,
+})
 
+ctf_ranged.simple_register_gun("ctf_ranged:deagle_gold", {
+				  type = "pistol",
+				  description = "IMI Desert Eagle",
+				  texture = "rangedweapons_golden_deagle.png",
+				  fire_sound = "ctf_ranged_deagle",
+				  rounds = 8,
+				  range = 75,
+				  damage = 5,
+				  automatic = false,
+				  fire_interval = 0.5,
+				  liquid_travel_dist = 2
+})
+
+
+
+
+function launch_grenade(user)
+   grenades.throw_grenade("grenades:frag", 30, user)
+end
+
+ctf_ranged.simple_register_gun("ctf_ranged:m79", {
+				  type = "pistol",
+				  description = "M79",
+				  texture = "rangedweapons_m79.png",
+				  fire_sound = "ctf_ranged_ashotfir",
+				  ammo="ctf_ranged:40mm",
+				  rounds = 2,
+				  range = 50,
+				  damage = 3,
+				  automatic = false,
+				  fire_interval = 1.5,
+				  liquid_travel_dist = 2,
+				  on_fire_callback=launch_grenade
+})
+
+--------------------------
+-- Energy weapons
+--------------------------
+
+ctf_ranged.simple_register_gun("ctf_ranged:energy_pistol", {
+	type = "pistol",
+	description = "Laser Blaster",
+	texture = "rangedweapons_laser_blaster.png",
+	fire_sound = "ctf_ranged_dzap",
+	rounds = 20,
+	range = 85,
+	damage = 4,
+	automatic = false,
+	fire_interval = 0.35,
+	liquid_travel_dist = 2,
+	ammo = "ctf_ranged:eammo"
+})
+
+ctf_ranged.simple_register_gun("ctf_ranged:energy_rifle", {
+	type = "smg",
+	description = "Laser Rifle",
+	texture = "rangedweapons_laser_rifle.png",
+	fire_sound = "ctf_ranged_dzap",
+	bullet = {
+	   spread = 1.0,
+	},
+	automatic = true,
+	rounds = 30,
+	range = 75,
+	damage = 7,
+	fire_interval = 0.25,
+	liquid_travel_dist = 2,
+	ammo = "ctf_ranged:eammo"
+})
+
+ctf_ranged.simple_register_gun("ctf_ranged:energy_shotgun", {
+	type = "shotgun",
+	description = "Laser Shotgun",
+	texture = "rangedweapons_laser_shotgun.png",
+	fire_sound = "ctf_ranged_plasma",
+	bullet = {
+	   amount = 10,
+	   spread = 3.0,
+	},
+	rounds = 10,
+	range = 25,
+	damage = 2,
+	fire_interval = 0.65,
+	automatic = false,
+	ammo = "ctf_ranged:eammo"
+})
