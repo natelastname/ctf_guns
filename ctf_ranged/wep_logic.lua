@@ -32,6 +32,7 @@ local function process_ray(ray, user, look_dir, def)
 	    end
 	 else
 	    if nodedef.walkable and nodedef.pointable then
+			local bullethole = def.bullethole_image or "ctf_ranged_bullethole"
 	       minetest.add_particle({
 		     pos = vector.subtract(hitpoint.intersection_point, vector.multiply(look_dir, 0.04)),
 		     velocity = vector.new(),
@@ -39,7 +40,7 @@ local function process_ray(ray, user, look_dir, def)
 		     expirationtime = def.bullethole_lifetime or 3,
 		     size = 1,
 		     collisiondetection = false,
-		     texture = "ctf_ranged_bullethole.png",
+		     texture = bullethole..".png",
 	       })
 	    elseif nodedef.groups.liquid then
 	       minetest.add_particlespawner({
@@ -118,6 +119,8 @@ function ctf_ranged.simple_register_gun(name, def)
 							    ctf_guns_scope_zoom = def.scope_zoom or nil,
 							    inventory_image = def.texture.."^[colorize:#F44:42",
 							    ammo = def.ammo or "ctf_ranged:ammo",
+								bullet_image = def.bullet_image,
+								bullethole_image = def.bullethole_image,
 							    rounds = def.rounds,
 							    _g_category = def.type,
 							    groups = {ranged = 1, [def.type] = 1, tier = def.tier or 1, not_in_creative_inventory = nil},
@@ -144,6 +147,8 @@ function ctf_ranged.simple_register_gun(name, def)
 							    loaded_def.inventory_overlay = def.texture_overlay
 							    loaded_def.wield_image = def.wield_texture or def.texture
 							    loaded_def.groups.not_in_creative_inventory = 1
+								loaded_def.bullet_image = def.bullet_image
+								loaded_def.bullethole_image = def.bullethole_image
 							    loaded_def.on_use = function(itemstack, user)
 							       if not ctf_ranged.can_use_gun(user, name) then
 								  minetest.sound_play("ctf_ranged_click", {pos = user:get_pos()}, true)
@@ -172,17 +177,19 @@ function ctf_ranged.simple_register_gun(name, def)
 								  end
 								  return
 							       end
-							       
+
 							       local spawnpos, look_dir = rawf.get_bullet_start_data(user)
 							       local endpos = vector.add(spawnpos, vector.multiply(look_dir, def.range))
 							       local rays
-							       
+
+								   local bullet_img = def.bullet_image or "ctf_ranged_bullet"
+
 							       if type(def.bullet) == "table" then
-								  def.bullet.texture = "ctf_ranged_bullet.png"
+								  def.bullet.texture = bullet_img..".png"
 							       else
-								  def.bullet = {texture = "ctf_ranged_bullet.png"}
+								  def.bullet = {texture = bullet_img..".png"}
 							       end
-							       
+
 							       if not def.bullet.spread then
 								  rays = {rawf.bulletcast(
 									     def.bullet,
@@ -191,13 +198,13 @@ function ctf_ranged.simple_register_gun(name, def)
 							       else
 								  rays = rawf.spread_bulletcast(def.bullet, spawnpos, endpos, true, true)
 							       end
-							       
+
 							       minetest.sound_play(def.fire_sound, {pos = user:get_pos()}, true)
-							       
+
 							       for _, ray in pairs(rays) do
 								  process_ray(ray, user, look_dir, def)
 							       end
-							       
+
 							       if def.rounds > 0 then
 								  return rawf.unload_weapon(itemstack)
 							       end
