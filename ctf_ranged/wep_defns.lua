@@ -401,6 +401,8 @@ ctf_ranged.simple_register_gun("ctf_ranged:energy_pistol", {
 	automatic = false,
 	fire_interval = 0.35,
 	liquid_travel_dist = 2,
+	bullet_image = "ctf_ranged_ebullet",
+	bullethole_image = "ctf_ranged_ebullethole",
 	ammo = "ctf_ranged:eammo"
 })
 
@@ -418,6 +420,8 @@ ctf_ranged.simple_register_gun("ctf_ranged:energy_rifle", {
 	damage = 7,
 	fire_interval = 0.25,
 	liquid_travel_dist = 2,
+	bullet_image = "ctf_ranged_ebullet",
+	bullethole_image = "ctf_ranged_ebullethole",
 	ammo = "ctf_ranged:eammo"
 })
 
@@ -435,5 +439,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:energy_shotgun", {
 	damage = 2,
 	fire_interval = 0.65,
 	automatic = false,
+	bullet_image = "ctf_ranged_ebullet",
+	bullethole_image = "ctf_ranged_ebullethole",
 	ammo = "ctf_ranged:eammo"
 })
