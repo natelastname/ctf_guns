@@ -148,7 +148,7 @@ function ctf_ranged.simple_register_gun(name, def)
 							    loaded_def.inventory_overlay = def.texture_overlay
 							    loaded_def.wield_image = def.wield_texture or def.texture
 							    loaded_def.groups.not_in_creative_inventory = 1
-								loaded_def.fusion_mag = def.fusion_mag or false,
+								loaded_def.fusion_mag = def.fusion_mag or false
 								loaded_def.bullet_image = def.bullet_image
 								loaded_def.bullethole_image = def.bullethole_image
 							    loaded_def.on_use = function(itemstack, user)

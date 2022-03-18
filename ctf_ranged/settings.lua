@@ -52,7 +52,7 @@ end
 
 settings.fusion_reload_speed = minetest.settings:get("ctf_guns.fusion_reload_speed")
 if settings.fusion_reload_speed == nil then
-    settings.fusion_reload_speed = 1
+    settings.fusion_reload_speed = 3
     minetest.settings:set("ctf_guns.fusion_reload_speed", settings.fusion_reload_speed)
 else
     -- This value is actually percent of max durability (int16, 65535)

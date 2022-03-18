@@ -87,6 +87,10 @@ if ctf_ranged.settings.craft_energy_weapons == true then
     })
 end
 
+local fusion_pistol = ItemStack("ctf_ranged:fusion_pistol_loaded")
+local fusion_rifle = ItemStack("ctf_ranged:fusion_rifle_loaded")
+local fusion_shotgun = ItemStack("ctf_ranged:fusion_shotgun_loaded")
+
 -- Fusion Globalstep (Does reloading of loaded fusion energy weapons)
 local fusion_interval = 0.0
 minetest.register_globalstep(function (delta)
@@ -96,7 +100,7 @@ minetest.register_globalstep(function (delta)
             local pname = player:get_player_name()
             local pinv = player:get_inventory()
             -- Only process if a player has any of the 3 fusion energy weapons
-            if pinv:contains_item("ctf_ranged:fusion_pistol_loaded") or pinv:contains_item("ctf_ranged:fusion_rifle_loaded") or pinv:contains_item("ctf_ranged:fusion_shotgun_loaded") then
+            if pinv:contains_item("main", fusion_pistol) or pinv:contains_item("main", fusion_rifle) or pinv:contains_item("main", fusion_shotgun) then
                 -- Iterate main inventory
                 for i, stack in pairs(pinv:get_list("main")) do
                     -- Only work on stuff not empty things
@@ -128,17 +132,17 @@ end)
 -- Allow Energy upgrading to Fusion?
 if ctf_ranged.settings.allow_energy_fusion == true then
     minetest.register_craft({
-        type = "shapeless"
+        type = "shapeless",
         output = "ctf_ranged:fusion_pistol",
         recipe = {"ctf_ranged:energy_pistol", "ctf_ranged:gunparte"}
     })
     minetest.register_craft({
-        type = "shapeless"
+        type = "shapeless",
         output = "ctf_ranged:fusion_rifle",
         recipe = {"ctf_ranged:energy_rifle", "ctf_ranged:gunparte"}
     })
     minetest.register_craft({
-        type = "shapeless"
+        type = "shapeless",
         output = "ctf_ranged:fusion_shotgun",
         recipe = {"ctf_ranged:energy_shotgun", "ctf_ranged:gunparte"}
     })
