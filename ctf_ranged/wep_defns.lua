@@ -27,6 +27,10 @@
    - E: ctf_ranged:energy_pistol
    - E: ctf_ranged:energy_rifle
    - E: ctf_ranged:energy_shotgun
+   Fusion Energy weapons:
+   - E: ctf_ranged:fuison_pistol
+   - E: ctf_ranged:fusion_rifle
+   - E: ctf_ranged:fusion_shotgun
 
 ]]--
 
@@ -442,4 +446,65 @@ ctf_ranged.simple_register_gun("ctf_ranged:energy_shotgun", {
 	bullet_image = "ctf_ranged_ebullet",
 	bullethole_image = "ctf_ranged_ebullethole",
 	ammo = "ctf_ranged:eammo"
+})
+
+--------------------------
+-- Fusion Energy weapons
+--------------------------
+
+ctf_ranged.simple_register_gun("ctf_ranged:fusion_pistol", {
+	type = "pistol",
+	description = "Laser Blaster (Fusion)",
+	texture = "rangedweapons_laser_blaster.png",
+	fire_sound = "ctf_ranged_dzap",
+	rounds = 20,
+	range = 85,
+	damage = 4,
+	automatic = false,
+	fire_interval = 0.35,
+	liquid_travel_dist = 2,
+	bullet_image = "ctf_ranged_ebullet",
+	bullethole_image = "ctf_ranged_ebullethole",
+	ammo = "ctf_ranged:eammo",
+	fusion_mag = true
+})
+
+ctf_ranged.simple_register_gun("ctf_ranged:fusion_rifle", {
+	type = "smg",
+	description = "Laser Rifle (Fusion)",
+	texture = "rangedweapons_laser_rifle.png",
+	fire_sound = "ctf_ranged_dzap",
+	bullet = {
+	   spread = 1.0,
+	},
+	automatic = true,
+	rounds = 30,
+	range = 75,
+	damage = 7,
+	fire_interval = 0.25,
+	liquid_travel_dist = 2,
+	bullet_image = "ctf_ranged_ebullet",
+	bullethole_image = "ctf_ranged_ebullethole",
+	ammo = "ctf_ranged:eammo",
+	fusion_mag = true
+})
+
+ctf_ranged.simple_register_gun("ctf_ranged:fusion_shotgun", {
+	type = "shotgun",
+	description = "Laser Shotgun (Fusion)",
+	texture = "rangedweapons_laser_shotgun.png",
+	fire_sound = "ctf_ranged_plasma",
+	bullet = {
+	   amount = 10,
+	   spread = 3.0,
+	},
+	rounds = 10,
+	range = 25,
+	damage = 2,
+	fire_interval = 0.65,
+	automatic = false,
+	bullet_image = "ctf_ranged_ebullet",
+	bullethole_image = "ctf_ranged_ebullethole",
+	ammo = "ctf_ranged:eammo",
+	fusion_mag = true
 })

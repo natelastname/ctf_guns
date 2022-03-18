@@ -121,6 +121,7 @@ function ctf_ranged.simple_register_gun(name, def)
 							    ammo = def.ammo or "ctf_ranged:ammo",
 								bullet_image = def.bullet_image,
 								bullethole_image = def.bullethole_image,
+								fusion_mag = def.fusion_mag or false,
 							    rounds = def.rounds,
 							    _g_category = def.type,
 							    groups = {ranged = 1, [def.type] = 1, tier = def.tier or 1, not_in_creative_inventory = nil},
@@ -147,6 +148,7 @@ function ctf_ranged.simple_register_gun(name, def)
 							    loaded_def.inventory_overlay = def.texture_overlay
 							    loaded_def.wield_image = def.wield_texture or def.texture
 							    loaded_def.groups.not_in_creative_inventory = 1
+								loaded_def.fusion_mag = def.fusion_mag or false,
 								loaded_def.bullet_image = def.bullet_image
 								loaded_def.bullethole_image = def.bullethole_image
 							    loaded_def.on_use = function(itemstack, user)

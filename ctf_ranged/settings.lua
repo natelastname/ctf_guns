@@ -43,3 +43,18 @@ if settings.craft_energy_weapons == nil then
     settings.craft_energy_weapons = true
     minetest.settings:set_bool("ctf_guns.craft_energy_weapons", settings.craft_energy_weapons)
 end
+
+settings.allow_energy_fusion = minetest.settings:get_bool("ctf_guns.allow_energy_fusion")
+if settings.allow_energy_fusion == nil then
+    settings.allow_energy_fusion = true
+    minetest.settings:set_bool("ctf_guns.allow_energy_fusion", settings.allow_energy_fusion)
+end
+
+settings.fusion_reload_speed = minetest.settings:get("ctf_guns.fusion_reload_speed")
+if settings.fusion_reload_speed == nil then
+    settings.fusion_reload_speed = 1
+    minetest.settings:set("ctf_guns.fusion_reload_speed", settings.fusion_reload_speed)
+else
+    -- This value is actually percent of max durability (int16, 65535)
+    settings.fusion_reload_speed = math.floor((tonumber(settings.fusion_reload_speed) / 100.0) * 65535.0)
+end
