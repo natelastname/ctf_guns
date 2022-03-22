@@ -11,8 +11,10 @@ local function binoculars_override(player)
    local scope_zoom = w_item:get_definition().ctf_guns_scope_zoom
 
    if scope_zoom == nil then
-      -- No gun equipped? check for binoculars 
-      old_binoculars_update(player)
+      -- No gun equipped? check for binoculars
+      if old_binoculars_update ~= nil then
+         old_binoculars_update(player)
+      end
       return
    end
 
@@ -21,13 +23,15 @@ local function binoculars_override(player)
       player:set_properties({zoom_fov = scope_zoom})
       return
    end
-   
+
 
 end
 
 minetest.register_on_mods_loaded(function()
-      old_binoculars_update = binoculars.update_player_property
-      binoculars.update_player_property = binoculars_override
+      if minetest.get_modpath("binoculars") then
+         old_binoculars_update = binoculars.update_player_property
+         binoculars.update_player_property = binoculars_override
+      end
 
       controls.register_on_press(function(player, control_name)
 	    if control_name ~= "zoom" then
