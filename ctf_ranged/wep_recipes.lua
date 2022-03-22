@@ -16,6 +16,43 @@
 
 ]]--
 
+local gear_steel = "basic_materials:gear_steel"
+local steel_ingot = "default:steel_ingot"
+local steelblock = "default:steelblock"
+local gold_ingot = "default:gold_ingot"
+local goldblock = "default:goldblock"
+local diamondblock = "default:diamondblock"
+local brass_ingot = "basic_materials:brass_ingot"
+local mese_crystal = "default:mese_crystal"
+local gravel = "default:gravel"
+local gunpowder = "tnt:gunpowder"
+local diamond = "default:diamond"
+local tin_ingot = "default:tin_ingot"
+local bronze_ingot = "default:bronze_ingot"
+local copper = "default:copper_ingot"
+
+if minetest.get_modpath("mcl_core") ~= nil then
+	steel_ingot = "mcl_core:iron_ingot"
+	steelblock = "mcl_core:ironblock"
+	gold_ingot = "mcl_core:gold_ingot"
+	goldblock = "mcl_core:goldblock"
+	diamondblock = "mcl_core:diamondblock"
+	brass_ingot = gold_ingot -- Use a gold ingot instead (Warning, don't use this in multiple recipes which also could take gold)
+	mese_crystal = "mcl_core:diamond" -- Use a diamond instead (Warning, don't use this in multiple recipes which could also take diamond)
+	diamond = "mcl_core:diamond"
+	gear_steel = "xpane:bar_flat" -- Use a iron bars instead
+	gravel = "mcl_core:gravel"
+	gunpowder = "mcl_mobitems:gunpowder"
+	tin_ingot = steelblock
+	bronze_ingot = goldblock
+	-- If mcl_copper is installed it could be MCL5 or MCL2 + mcl_copper mod
+	if minetest.get_modpath("mcl_copper") ~= nil then
+		copper = "mcl_copper:copper_ingot"
+	else
+		copper = gear_steel
+	end
+end
+
 minetest.register_craftitem("ctf_ranged:40mm", {
 			       description = "40mm Grenade",
 			       inventory_image = "rangedweapons_40mm.png",
@@ -53,16 +90,16 @@ if ctf_ranged.settings.craft_ammo == true then
 	    output = "ctf_ranged:ammo",
 	    type = "shapeless",
 	    recipe = {
-	       "basic_materials:brass_ingot",
-	       "mobs_mc:slimeball"
+	       brass_ingot,
+	       "mobs_mc:slimeball" -- Could use mcl_mobitems:slimeball
 	    }
       })
       minetest.register_craft({
 	    output = "ctf_ranged:40mm",
 	    type = "shapeless",
 	    recipe = {
-	       "basic_materials:brass_ingot",
-	       "mobs_mc:ghast_tear"
+	       brass_ingot,
+	       "mobs_mc:ghast_tear" -- Could use mcl_mobitems:ghast_tear
 	    }
       })
    else
@@ -70,25 +107,26 @@ if ctf_ranged.settings.craft_ammo == true then
 	    output = "ctf_ranged:ammo",
 	    type = "shapeless",
 	    recipe = {
-	       "basic_materials:brass_ingot",
-	       "default:gravel"
+	       brass_ingot,
+	       gravel
 	    }
       })
       minetest.register_craft({
 	    output = "ctf_ranged:40mm",
 	    type = "shapeless",
 	    recipe = {
-	       "basic_materials:brass_ingot",
-	       "tnt:gunpowder"
+	       brass_ingot,
+	       gunpowder
 	    }
       })
    end
+   -- Redundant Recipes vvv And ^^^
    if(minetest.get_modpath("mobs_mc")) ~= nil then
       minetest.register_craft({
 	    output = "ctf_ranged:ammo",
 	    type = "shapeless",
 	    recipe = {
-	       "basic_materials:brass_ingot",
+	       brass_ingot,
 	       "mobs_mc:slimeball"
 	    }
       })
@@ -97,8 +135,8 @@ if ctf_ranged.settings.craft_ammo == true then
 	    output = "ctf_ranged:ammo",
 	    type = "shapeless",
 	    recipe = {
-	       "basic_materials:brass_ingot",
-	       "default:gravel"
+	       brass_ingot,
+	       gravel
 	    }
       })
    end
@@ -121,15 +159,15 @@ if ctf_ranged.settings.craft_gunparts == true then
 		output = "ctf_ranged:gunpart1",
 		type = "shapeless",
 		recipe = {
-		"basic_materials:gear_steel",
-		"default:steelblock"
+		gear_steel,
+		steelblock
 		}
 	})
 	minetest.register_craft({
 		output = "ctf_ranged:gunpart2",
 		recipe = {
 		{"", "", ""},
-		{"default:goldblock", "ctf_ranged:gunpart1", "default:goldblock"},
+		{goldblock, "ctf_ranged:gunpart1", goldblock},
 		{"", "", ""},
 		}
 	})
@@ -137,7 +175,7 @@ if ctf_ranged.settings.craft_gunparts == true then
 		output = "ctf_ranged:gunpart3",
 		recipe = {
 		{"", "", ""},
-		{"default:diamondblock", "ctf_ranged:gunpart2", "default:diamondblock"},
+		{diamondblock, "ctf_ranged:gunpart2", diamondblock},
 		{"", "", ""},
 		}
 	})
@@ -146,9 +184,9 @@ if ctf_ranged.settings.craft_gunparts == true then
 			output = "ctf_ranged:gunparte",
 			type = "shapeless",
 			recipe = {
-				"default:diamondblock",
-				"default:diamondblock",
-				"basic_materials:gear_steel"
+				diamondblock,
+				diamondblock,
+				gear_steel
 			}
 		})
 	end
@@ -162,10 +200,10 @@ end
 --------------------------------- Tier 1
 if ctf_ranged.settings.craft_tier1_weapons == true then
 	minetest.register_craft({output = "ctf_ranged:makarov", type = "shapeless",
-				recipe = {"ctf_ranged:gunpart1","default:steel_ingot"}})
+				recipe = {"ctf_ranged:gunpart1",steel_ingot}})
 
 	minetest.register_craft({output = "ctf_ranged:mini14", type = "shapeless",
-				recipe = {"ctf_ranged:gunpart1","default:gold_ingot"}})
+				recipe = {"ctf_ranged:gunpart1",gold_ingot}})
 
 	minetest.register_craft({output = "ctf_ranged:remington870", type = "shapeless",
 				recipe = {"ctf_ranged:gunpart1","default:tin_ingot"}})
@@ -184,10 +222,10 @@ end
 
 if ctf_ranged.settings.craft_tier2_weapons == true then
 	minetest.register_craft({output = "ctf_ranged:glock17", type = "shapeless",
-				recipe = {"ctf_ranged:gunpart2","default:steel_ingot"}})
+				recipe = {"ctf_ranged:gunpart2",steel_ingot}})
 
 	minetest.register_craft({output = "ctf_ranged:svd", type = "shapeless",
-				recipe = {"ctf_ranged:gunpart2","default:gold_ingot"}})
+				recipe = {"ctf_ranged:gunpart2",gold_ingot}})
 
 	minetest.register_craft({output = "ctf_ranged:benelli", type = "shapeless",
 				recipe = {"ctf_ranged:gunpart2","default:tin_ingot"}})
@@ -206,10 +244,10 @@ end
 
 if ctf_ranged.settings.craft_tier3_weapons == true then
 	minetest.register_craft({output = "ctf_ranged:deagle", type = "shapeless",
-				recipe = {"ctf_ranged:gunpart3","default:steel_ingot"}})
+				recipe = {"ctf_ranged:gunpart3",steel_ingot}})
 
 	minetest.register_craft({output = "ctf_ranged:m200", type = "shapeless",
-				recipe = {"ctf_ranged:gunpart3","default:gold_ingot"}})
+				recipe = {"ctf_ranged:gunpart3",gold_ingot}})
 
 	minetest.register_craft({output = "ctf_ranged:jackhammer", type = "shapeless",
 				recipe = {"ctf_ranged:gunpart3","default:tin_ingot"}})
@@ -226,9 +264,9 @@ end
 
 if ctf_ranged.settings.craft_energy_weapons == true then
 	minetest.register_craft({output = "ctf_ranged:energy_rifle", type = "shapeless",
-				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart3", "default:diamond"}})
+				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart3", diamond}})
 	minetest.register_craft({output = "ctf_ranged:energy_shotgun", type = "shapeless",
-				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart2", "default:diamond"}})
+				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart2", diamond}})
 	minetest.register_craft({output = "ctf_ranged:energy_pistol", type = "shapeless",
-				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart1", "default:diamond"}})
+				recipe = {"ctf_ranged:gunparte", "ctf_ranged:gunpart1", diamond}})
 end
