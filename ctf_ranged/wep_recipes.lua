@@ -41,7 +41,7 @@ if minetest.get_modpath("mcl_core") ~= nil then
 	brass_ingot = gold_ingot -- Use a gold ingot instead (Warning, don't use this in multiple recipes which also could take gold)
 	mese_crystal = "mcl_core:diamond" -- Use a diamond instead (Warning, don't use this in multiple recipes which could also take diamond)
 	diamond = "mcl_core:diamond"
-	gear_steel = "xpane:bar_flat" -- Use a iron bar instead
+	gear_steel = "xpanes:bar_flat" -- Use a iron bar instead
 	gravel = "mcl_core:gravel"
 	gunpowder = "mcl_mobitems:gunpowder"
 	tin_ingot = steelblock
@@ -52,7 +52,7 @@ if minetest.get_modpath("mcl_core") ~= nil then
 	else
 		copper = gear_steel
 	end
-	silver = "mcl_mobitems:magma_creme" -- Use Magma Creme instead
+	silver = "mcl_mobitems:magma_cream" -- Use Magma Cream instead
 end
 
 minetest.register_craftitem("ctf_ranged:40mm", {
