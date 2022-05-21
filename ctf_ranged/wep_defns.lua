@@ -386,6 +386,21 @@ ctf_ranged.simple_register_gun("ctf_ranged:m79", {
 				  on_fire_callback=launch_grenade
 })
 
+ctf_ranged.simple_register_gun("ctf_ranged:milkor", {
+	type = "pistol",
+	description = "Milkor",
+	texture = "rangedweapons_milkor.png",
+	fire_sound = "ctf_ranged_ashotfir",
+	ammo="ctf_ranged:40mm",
+	rounds = 6,
+	range = 50,
+	damage = 3,
+	automatic = true,
+	fire_interval = 0.4,
+	liquid_travel_dist = 3,
+	on_fire_callback=launch_grenade
+})
+
 --------------------------
 -- Energy weapons
 --------------------------
