@@ -381,7 +381,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:m79", {
 				  range = 50,
 				  damage = 3,
 				  automatic = false,
-				  fire_interval = 1.5,
+				  fire_interval = 1.5, -- Might need to decrease this to compete with Milkor or contrib milkor
 				  liquid_travel_dist = 2,
 				  on_fire_callback=launch_grenade
 })
@@ -396,10 +396,32 @@ ctf_ranged.simple_register_gun("ctf_ranged:milkor", {
 	range = 50,
 	damage = 3,
 	automatic = true,
-	fire_interval = 0.4,
+	fire_interval = 0.65, -- Slightly slower firerate so it's a bit more balanced
 	liquid_travel_dist = 3,
 	on_fire_callback=launch_grenade
 })
+
+-- A gun from your little helper (why not have custom content by a dev/contributor)
+ctf_ranged.simple_register_gun("ctf_ranged:milkor_apollo", {
+	type = "pistol",
+	-- Since you use Description I can add newlines \o/
+	-- Since " (Loaded)" is added to the end lets put that on a newline
+	description = "Contrib Milkor\nContributed By: Apollo\nMay 2022\n",
+	texture = "ctf_ranged_milkor_apollo.png", -- Edited Milkor texture (look at the heat or fire, one or the other)
+	fire_sound = "ctf_ranged_ashotfir",
+	ammo="ctf_ranged:40mm 2", -- Since you look via inventory:contains_item() I can make it eat ammo! \o/ (Balance restored)
+	rounds = 4, -- Slightly less ammo in mag than Milkor
+	range = 55, -- Just a tad bit more range (+5)
+	damage = 4, -- Slightly more damage (but since grenades are really the main thing might be worthless)
+	automatic = true, -- Must be auto, I live auto, non-auto == death to easy
+	fire_interval = 0.2, -- Insane firerate
+	liquid_travel_dist = 4,
+	on_fire_callback=function (user)
+		-- Fires grenades with a little bit more velocity
+		grenades.launch_grenade("grenades:frag", 50, user)
+	end
+})
+
 
 --------------------------
 -- Energy weapons
