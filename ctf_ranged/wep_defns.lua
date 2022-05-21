@@ -419,7 +419,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:milkor_apollo", {
 	liquid_travel_dist = 4,
 	on_fire_callback=function (user)
 		-- Fires grenades with a little bit more velocity
-		grenades.launch_grenade("grenades:frag", 50, user)
+		grenades.throw_grenade("grenades:frag", 50, user)
 	end
 })
 
