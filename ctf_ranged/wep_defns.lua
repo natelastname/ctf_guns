@@ -386,6 +386,7 @@ ctf_ranged.simple_register_gun("ctf_ranged:m79", {
 				  on_fire_callback=launch_grenade
 })
 
+-- Applies #12 PR
 ctf_ranged.simple_register_gun("ctf_ranged:milkor", {
 	type = "pistol",
 	description = "Milkor",
