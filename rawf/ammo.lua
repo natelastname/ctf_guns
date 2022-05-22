@@ -23,9 +23,10 @@ function api.unload_weapon(weapon, amount)
 		"Must define 'rounds' property for ranged weapon "..dump(iname)
 	)
 
-	local new_wear = (65535 / (rounds-1)) * (amount or 1)
+	local new_wear = (65535 / (rounds)) * (amount or 1)
 
-	new_wear = weapon:get_wear() + new_wear
+	-- Applies #15 PR
+	new_wear = weapon:get_wear() + new_wear + 1
 
 	if new_wear >= 65535 then
 		return ItemStack(weapon:get_definition().unloaded_name)
