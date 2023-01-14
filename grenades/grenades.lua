@@ -129,6 +129,7 @@ grenades.register_grenade("grenades:frag_sticky", fragdef_sticky)
 
 local sounds = {}
 local SMOKE_GRENADE_TIME = 30
+local is_ctf_teams_installed = minetest.get_modpath("ctf_teams")
 grenades.register_grenade("grenades:smoke", {
 	description = "Smoke grenade (Generates smoke around blast site)",
 	image = "grenades_smoke_grenade.png",
@@ -139,17 +140,19 @@ grenades.register_grenade("grenades:smoke", {
 		local player = minetest.get_player_by_name(pname)
 		if not player or not pos then return end
 
-		local pteam = ctf_teams.get(pname)
+		if is_ctf_teams_installed then
+			local pteam = ctf_teams.get(pname)
 
-		if pteam then
-			local fpos = ctf_map.current_map.teams[pteam].flag_pos
+			if pteam then
+				local fpos = ctf_map.current_map.teams[pteam].flag_pos
+	
+				if not fpos then return end
 
-			if not fpos then return end
-
-			if vector.distance(pos, fpos) <= 15 then
-				minetest.chat_send_player(pname, "You can't explode smoke grenades so close to your flag!")
-				player:get_inventory():add_item("main", "grenades:smoke")
-				return
+				if vector.distance(pos, fpos) <= 15 then
+					minetest.chat_send_player(pname, "You can't explode smoke grenades so close to your flag!")
+					player:get_inventory():add_item("main", "grenades:smoke")
+					return
+				end
 			end
 		end
 
